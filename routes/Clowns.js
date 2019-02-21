@@ -75,7 +75,8 @@ clowns.get('/all', (req, res) => {
         attributes: [
             'id', 
             'first_name', 
-            'last_name'
+            'last_name',
+            'image'
         ]
     })
     .then(clowns => {
