@@ -70,4 +70,33 @@ clowns.post('/login', (req, res) => {
         })
 })
 
+clowns.get('/all', (req, res) => {
+    Clown.findAll({
+        attributes: [
+            'id', 
+            'first_name', 
+            'last_name'
+        ]
+    })
+    .then(clowns => {
+        res.send(clowns);
+    })
+})
+
+clowns.get('/:id', (req, res) => {
+    Clown.findById(req.params.id, {
+        attributes: [
+            'id', 
+            'first_name', 
+            'last_name'
+        ]
+    })
+    .then(clown => {
+        res.send(clown);
+    })
+    .catch(err => {
+        res.status(400).json({ error: err })
+    })
+})
+
 module.exports = clowns

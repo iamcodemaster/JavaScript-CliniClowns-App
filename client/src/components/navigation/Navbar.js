@@ -21,6 +21,11 @@ class Navbar extends Component {
                         Register
                     </Link>
                 </li>
+                <li className="nav-item">
+                    <Link to="/clowns" className="nav-link">
+                        Clowns
+                    </Link>
+                </li>
             </ul>
         )
         const userLink = (

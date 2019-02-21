@@ -26,7 +26,7 @@ app.listen(port, () => {
 // Websockets videochat //
 
 const WebSocket = require('ws')
-const wss = new WebSocket.Server({ port: 8080 })
+const wss = new WebSocket.Server({ port: 8000 })
 let users = {}
 
 const sendTo = (ws, message) => {
