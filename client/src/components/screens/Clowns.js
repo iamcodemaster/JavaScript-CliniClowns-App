@@ -23,6 +23,7 @@ class Clowns extends Component {
     render () {
         const listClowns = this.state.clowns.map((clown) =>
             <li key={clown.id}>
+                {/* <img src={clown.image} alt={"foto " + clown.first_name}></img> */}
                 <a href={"clowns/" + clown.id}>{clown.firstName}</a>
             </li>
         );
