@@ -74,7 +74,8 @@ clowns.get('/all', (req, res) => {
         attributes: [
             'id', 
             'firstName', 
-            'lastName'
+            'lastName',
+            'image'
         ]
     })
     .then(clowns => {
@@ -83,11 +84,12 @@ clowns.get('/all', (req, res) => {
 })
 
 clowns.get('/:id', (req, res) => {
-    Clown.findById(req.params.id, {
+    Clown.findByPk(req.params.id, {
         attributes: [
             'id', 
             'firstName', 
-            'lastName'
+            'lastName',
+            'image'
         ]
     })
     .then(clown => {
