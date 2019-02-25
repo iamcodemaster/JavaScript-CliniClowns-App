@@ -21,8 +21,6 @@ app.listen(port, () => {
 
 
 
-
-
 // Websockets videochat //
 
 const WebSocket = require('ws')

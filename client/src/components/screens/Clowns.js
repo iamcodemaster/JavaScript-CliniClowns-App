@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { getAllClowns } from '../../functions/Functions'
+import ScreenNav from '../navigation/ScreenNav'
 
 class Clowns extends Component {
     constructor() {
@@ -22,12 +23,13 @@ class Clowns extends Component {
     render () {
         const listClowns = this.state.clowns.map((clown) =>
             <li key={clown.id}>
-                <a href={"clowns/" + clown.id}>{clown.first_name}</a>
+                <a href={"clowns/" + clown.id}>{clown.firstName}</a>
             </li>
         );
 
         return (
             <div className="container">
+            <ScreenNav/>
                 <div>
                     <h1 className="text-center">Clowns</h1>
                     <ul>{listClowns}</ul>

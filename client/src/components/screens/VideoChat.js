@@ -7,8 +7,8 @@ class VideoChat extends Component {
         this.state = {
             id: '',
             nickname: '',
-            first_name: '',
-            last_name: '',
+            firstName: '',
+            lastName: '',
             email: '',
             ws: new WebSocket('ws://localhost:8000'),
             connection: new RTCPeerConnection({
@@ -27,16 +27,16 @@ class VideoChat extends Component {
             if(auth.user.type === 'user') {
                 this.setState({
                     id: auth.user.id,
-                    first_name: auth.user.first_name,
-                    last_name: auth.user.last_name,
+                    firstName: auth.user.firstName,
+                    lastName: auth.user.lastName,
                     email: auth.user.email
                 })
             } else if(auth.user.type === 'clown') {
                 this.setState({
                     id: auth.user.id,
                     nickname: auth.user.nickname,
-                    first_name: auth.user.first_name,
-                    last_name: auth.user.last_name,
+                    firstName: auth.user.firstName,
+                    lastName: auth.user.lastName,
                     email: auth.user.email
                 })
             }
@@ -99,7 +99,7 @@ class VideoChat extends Component {
 
             sendMessage({
                 type: 'login',
-                username: auth.user.first_name
+                username: auth.user.firstName
             })
         })
 

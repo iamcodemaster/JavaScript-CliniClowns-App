@@ -4,8 +4,8 @@ export const register = newClown => {
     return axios
         .post('/clowns/register', {
             nickname: newClown.nickname,
-            first_name: newClown.first_name,
-            last_name: newClown.last_name,
+            firstName: newClown.firstName,
+            lastName: newClown.lastName,
             email: newClown.email,
             password: newClown.password
         })

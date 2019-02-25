@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 
-import Navbar from './components/navigation/Navbar'
 import Home from './components/screens/Home'
 import Login from './components/userRegistration/Login'
 import ClownRegister from './components/clownRegistration/Register'
@@ -17,7 +16,6 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-          <Navbar />
           <Route exact path="/" component={Home} />
           <div className="container">
             <Route exact path="/register" component={Register} />

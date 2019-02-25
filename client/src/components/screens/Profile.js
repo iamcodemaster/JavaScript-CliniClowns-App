@@ -7,8 +7,8 @@ class Profile extends Component {
         this.state = {
             id: '',
             nickname: '',
-            first_name: '',
-            last_name: '',
+            firstName: '',
+            lastName: '',
             email: ''
         }
     }
@@ -21,16 +21,16 @@ class Profile extends Component {
             if(auth.user.type === 'user') {
                 this.setState({
                     id: auth.user.id,
-                    first_name: auth.user.first_name,
-                    last_name: auth.user.last_name,
+                    firstName: auth.user.firstName,
+                    lastName: auth.user.lastName,
                     email: auth.user.email
                 })
             } else if(auth.user.type === 'clown') {
                 this.setState({
                     id: auth.user.id,
                     nickname: auth.user.nickname,
-                    first_name: auth.user.first_name,
-                    last_name: auth.user.last_name,
+                    firstName: auth.user.firstName,
+                    lastName: auth.user.lastName,
                     email: auth.user.email
                 })
             }
@@ -54,11 +54,11 @@ class Profile extends Component {
                             </tr>
                             <tr>
                                 <td>First Name</td>
-                                <td>{this.state.first_name}</td>
+                                <td>{this.state.firstName}</td>
                             </tr>
                             <tr>
                                 <td>Last Name</td>
-                                <td>{this.state.last_name}</td>
+                                <td>{this.state.lastName}</td>
                             </tr>
                             <tr>
                                 <td>Email</td>

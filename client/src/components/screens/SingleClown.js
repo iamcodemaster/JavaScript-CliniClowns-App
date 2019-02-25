@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { getClown } from '../../functions/Functions'
+import ScreenNav from '../navigation/ScreenNav'
 
 class Clowns extends Component {
     constructor() {
@@ -15,8 +16,8 @@ class Clowns extends Component {
         // get param from url query with -> this.props.match.params.id
         getClown(this.props.match.params.id).then(res => {
             this.setState({
-                firstName: res.data.first_name,
-                lastName: res.data.last_name,
+                firstName: res.data.firstName,
+                lastName: res.data.lastName,
                 imageUrl: '../src/logo.svg',
             })
         });
@@ -25,6 +26,7 @@ class Clowns extends Component {
     render () {
         return (
             <div className="container">
+                <ScreenNav/>
                 <div>
                     <h1 className="text-center">{this.state.firstName} {this.state.lastName}</h1>
                 </div>

@@ -5,8 +5,8 @@ class Register extends Component {
     constructor() {
         super()
         this.state = {
-            first_name: '',
-            last_name: '',
+            firstName: '',
+            lastName: '',
             email: '',
             password: ''
         }
@@ -23,8 +23,8 @@ class Register extends Component {
         e.preventDefault()
 
         const user = {
-            first_name: this.state.first_name,
-            last_name: this.state.last_name,
+            firstName: this.state.firstName,
+            lastName: this.state.lastName,
             email: this.state.email,
             password: this.state.password
         }
@@ -42,22 +42,22 @@ class Register extends Component {
                         <form noValidate onSubmit={this.onSubmit}>
                             <h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>
                             <div className="form-group">
-                                <label htmlFor="first_name">First Name</label>
+                                <label htmlFor="firstName">First Name</label>
                                 <input type="text"
                                     className="form-control"
-                                    name="first_name"
+                                    name="firstName"
                                     placeholder="Enter Fist Name"
-                                    value={this.state.first_name}
+                                    value={this.state.firstName}
                                     onChange={this.onChange}
                                 />
                             </div>
                             <div className="form-group">
-                                <label htmlFor="last_name">Last Name</label>
+                                <label htmlFor="lastName">Last Name</label>
                                 <input type="text"
                                     className="form-control"
-                                    name="last_name"
+                                    name="lastName"
                                     placeholder="Enter Last Name"
-                                    value={this.state.last_name}
+                                    value={this.state.lastName}
                                     onChange={this.onChange}
                                 />
                             </div>

@@ -4,20 +4,19 @@ const cors = require('cors')
 const jwt = require("jsonwebtoken")
 const bcrypt = require('bcrypt')
 
-const Clown = require("../models/Clown")
+const Clown = require('../models').Clown
 clowns.use(cors())
 
 process.env.SECRET_KEY = 'secret'
 
 clowns.post('/register', (req, res) => {
-    const today = new Date()
+    const today = new Date();
     const clownData = {
         nickname: req.body.nickname,
-        first_name: req.body.first_name,
-        last_name: req.body.last_name,
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
         email: req.body.email,
-        password: req.body.password,
-        created: today
+        password: req.body.password
     }
 
     Clown.findOne({
@@ -74,8 +73,8 @@ clowns.get('/all', (req, res) => {
     Clown.findAll({
         attributes: [
             'id', 
-            'first_name', 
-            'last_name'
+            'firstName', 
+            'lastName'
         ]
     })
     .then(clowns => {
@@ -87,8 +86,8 @@ clowns.get('/:id', (req, res) => {
     Clown.findById(req.params.id, {
         attributes: [
             'id', 
-            'first_name', 
-            'last_name'
+            'firstName', 
+            'lastName'
         ]
     })
     .then(clown => {
