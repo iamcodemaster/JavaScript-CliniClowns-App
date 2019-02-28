@@ -7,6 +7,7 @@ import ClownRegister from './components/clownRegistration/Register'
 import ClownLogin from './components/clownRegistration/Login'
 import Register from './components/userRegistration/Register'
 import Profile from './components/screens/Profile'
+import Videos from './components/screens/Videos'
 import VideoChat from './components/screens/VideoChat'
 import Clowns from './components/screens/Clowns'
 import SingleClown from './components/screens/SingleClown'
@@ -21,6 +22,7 @@ class App extends Component {
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/profile" component={Profile} />
+            <Route exact path="/videos" component={Videos} />
             <Route exact path="/videochat" component={VideoChat} />
             <Route exact path="/clowns" component={Clowns} />
             <Route exact path="/clowns/:id" component={SingleClown} />

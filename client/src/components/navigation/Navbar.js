@@ -26,6 +26,11 @@ class Navbar extends Component {
                         Clowns
                     </Link>
                 </li>
+                <li className="nav-item">
+                    <Link to="/videos" className="nav-link">
+                        Videos
+                    </Link>
+                </li>
             </ul>
         )
         const userLink = (
