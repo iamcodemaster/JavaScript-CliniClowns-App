@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import ScreenNav from '../navigation/ScreenNav'
+import './Videos.css'
 
 class Videos extends Component {
     constructor() {

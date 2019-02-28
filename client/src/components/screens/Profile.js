@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { requireAuth } from '../../functions/AuthFunctions'
+import './Agenda.css'
 
 class Profile extends Component {
     constructor() {

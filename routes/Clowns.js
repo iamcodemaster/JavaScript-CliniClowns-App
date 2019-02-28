@@ -73,8 +73,7 @@ clowns.get('/all', (req, res) => {
     Clown.findAll({
         attributes: [
             'id', 
-            'firstName', 
-            'lastName',
+            'nickname',
             'image'
         ]
     })
