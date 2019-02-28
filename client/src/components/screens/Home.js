@@ -8,7 +8,7 @@ class Home extends Component {
             <div className="container">
                 <Navbar />
                 <div>
-                    <h1 className="text-center">Map</h1>
+                    <h1 className="text-center">Home</h1>
                 </div>
             </div>
         )

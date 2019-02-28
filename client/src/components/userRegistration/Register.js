@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { register } from '../../functions/UserFunctions'
+import ScreenNav from '../navigation/ScreenNav'
 import './Register.css'
 
 class Register extends Component {
@@ -38,6 +39,7 @@ class Register extends Component {
     render () {
         return (
             <div className="container">
+            <ScreenNav/>
                 <div className="row">
                     <div className="col-md-6 mt-5 mx-auto">
                         <form noValidate onSubmit={this.onSubmit}>

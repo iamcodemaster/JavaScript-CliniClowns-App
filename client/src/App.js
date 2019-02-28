@@ -21,7 +21,6 @@ class App extends Component {
       <Router>
         <div className="App">
           <Route exact path="/" component={Home} />
-          <div className="container">
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/profile" component={Profile} />
@@ -32,7 +31,6 @@ class App extends Component {
             <Route exact path="/clowns/login" component={ClownLogin} />
             <Route exact path="/clowns/register" component={ClownRegister} />
           </div>
-        </div>
       </Router>
     );
   }
