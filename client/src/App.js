@@ -12,6 +12,9 @@ import VideoChat from './components/screens/VideoChat'
 import Clowns from './components/screens/Clowns'
 import SingleClown from './components/screens/SingleClown'
 
+import './reset.css'
+import './main.css'
+
 class App extends Component {
   render () {
     return (
