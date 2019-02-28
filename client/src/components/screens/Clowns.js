@@ -31,9 +31,9 @@ class Clowns extends Component {
         return (
             <div className="container">
             <ScreenNav/>
-                <div>
-                    <h1 className="text-center">Clowns</h1>
-                    <ul>{listClowns}</ul>
+                <div class="container--content">
+                    <h1>Clowns</h1>
+                    <ul class="container--flex">{listClowns}</ul>
                 </div>
             </div>
         )
