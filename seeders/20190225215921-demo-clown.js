@@ -12,6 +12,15 @@ module.exports = {
       image: '/assets/img/pluch.png',
       createdAt: today,
       updatedAt: today
+    }, {
+      nickname: 'Pluch',
+      firstName: 'Pluch',
+      lastName: 'Pluch',
+      email: 'pluch@test.com',
+      password: '$2b$10$/pno5b2mVBjSWFqHNfSpgeX5cCDcQzlC1XX.4HBHHtSq7RDEvW842',
+      image: '/assets/img/pluch.png',
+      createdAt: today,
+      updatedAt: today
     }], {});
   },
 
