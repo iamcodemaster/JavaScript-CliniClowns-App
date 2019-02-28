@@ -13,6 +13,11 @@ class Navbar extends Component {
         const loginRegLink = (
             <ul className="navbar-nav">
                 <li className="nav-item">
+                    <Link to="/" className="nav-link">
+                        Home
+                    </Link>
+                </li>
+                <li className="nav-item">
                     <Link to="/login" className="nav-link">
                         Login
                     </Link>
@@ -37,6 +42,11 @@ class Navbar extends Component {
         const userLink = (
             <ul className="navbar-nav">
                 <li className="nav-item">
+                    <Link to="/" className="nav-link">
+                        Home
+                    </Link>
+                </li>
+                <li className="nav-item">
                     <Link to="/profile" className="nav-link">
                         User
                     </Link>
@@ -55,17 +65,8 @@ class Navbar extends Component {
         )
 
         return (
-            <nav>
-                <div>
-                    <ul className="navbar-nav">
-                        <li className="nav-item">
-                            <Link to="/" className="nav-link">
-                                Home
-                            </Link>
-                        </li>
-                    </ul>
-                    {localStorage.token ? userLink : loginRegLink}
-                </div>
+            <nav>    
+                {localStorage.token ? userLink : loginRegLink}
             </nav>
         )
     }

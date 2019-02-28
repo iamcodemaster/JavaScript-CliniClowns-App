@@ -19,7 +19,7 @@ class ScreenNav extends Component {
     render() {
         return (
             <nav>
-                <a href="#" onClick={this.onClick}> Click me</a>
+                <a href="#" onClick={this.onClick}>Terug</a>
             </nav>
         )
     }
