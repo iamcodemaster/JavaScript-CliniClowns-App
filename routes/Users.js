@@ -68,4 +68,11 @@ users.post('/login', (req, res) => {
         })
 })
 
+users.post('/api/language', (req, res) => {
+    let language = jwt.sign(req.body.language, process.env.SECRET_KEY, {
+        expiresIn: 1440
+    })
+    res.send(language)
+})
+
 module.exports = users
