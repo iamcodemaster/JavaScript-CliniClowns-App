@@ -17,11 +17,12 @@
     "operatorsAliases": false
   },
   "production": {
-    "username": "root",
-    "password": null,
-    "database": "database_production",
-    "host": "127.0.0.1",
+    "username": "kztkgxg2hcu6bkds",
+    "password": "nj5efdf6u45ywl91",
+    "database": "yzkjewlnn8ht7sr4",
+    "host": "b8rg15mwxwynuk9q.chr7pe7iynqr.eu-west-1.rds.amazonaws.com",
     "dialect": "mysql",
+    "port": 3306,
     "operatorsAliases": false
   }
 }
