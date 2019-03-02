@@ -45,7 +45,7 @@ app.listen(port, (req, res) => {
 // Websockets videochat //
 
 const WebSocket = require('ws')
-const wss = new WebSocket.Server({ port: 5050 })
+const wss = new WebSocket.Server({ port: process.env.PORT || 5050 })
 let users = {}
 
 const sendTo = (ws, message) => {
