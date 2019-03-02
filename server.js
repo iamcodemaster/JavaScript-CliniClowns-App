@@ -44,100 +44,123 @@ app.listen(port, (req, res) => {
 
 // Websockets videochat //
 
-const WebSocket = require('ws')
-const wss = new WebSocket.Server({ port: 5050 })
-let users = {}
+var io = require('socket.io')();
 
-const sendTo = (ws, message) => {
-  ws.send(JSON.stringify(message))
-}
+io.on('connection', (client) => {
+  console.log("hello");
+  client.on('subscribeToTimer', (interval) => {
+    console.log('client is subscribing to timer with interval ', interval);
+    setInterval(() => {
+      client.emit('timer', new Date());
+    }, interval);
+  });
+});
 
-wss.on('connection', ws => {
-  console.log('User connected')
+const ioPort = 5050;
+io.listen(ioPort);
+console.log('listening on port ', ioPort);
 
-  ws.on('message', message => {
-    let data = null
+// io.on('connection', function(socket){
+//   console.log('a user connected');
+//   socket.on('disconnect', function(){
+//     console.log('user disconnected');
+//   });
+// });
 
-    try {
-      data = JSON.parse(message)
-    } catch (error) {
-      console.error('Invalid JSON', error)
-      data = {}
-    }
+// const WebSocket = require('ws')
+// const wss = new WebSocket.Server({ port: 5050 })
+// let users = {}
 
-    switch (data.type) {
-      case 'login':
-        console.log('User logged', data.username)
-        if (users[data.username]) {
-          sendTo(ws, { type: 'login', success: false })
-        } else {
-          users[data.username] = ws
-          ws.username = data.username
-          sendTo(ws, { type: 'login', success: true })
-        }
-        break
-      case 'offer':
-        console.log('Sending offer to: ', data.otherUsername)
-        if (users[data.otherUsername] != null) {
-          ws.otherUsername = data.otherUsername
-          sendTo(users[data.otherUsername], {
-            type: 'offer',
-            offer: data.offer,
-            username: ws.username
-          })
-        }
-        break
-      case 'answer':
-        console.log('Sending answer to: ', data.otherUsername)
-        if (users[data.otherUsername] != null) {
-          ws.otherUsername = data.otherUsername
-          sendTo(users[data.otherUsername], {
-            type: 'answer',
-            answer: data.answer
-          })
-        }
-        break
-      case 'candidate':
-        console.log('Sending candidate to:', data.otherUsername)
-        if (users[data.otherUsername] != null) {
-          sendTo(users[data.otherUsername], {
-            type: 'candidate',
-            candidate: data.candidate
-          })
-        }
-        break
-      case 'close':
-        console.log('Disconnecting from', data.otherUsername)
-        users[data.otherUsername].otherUsername = null
+// const sendTo = (ws, message) => {
+//   ws.send(JSON.stringify(message))
+// }
 
-        if (users[data.otherUsername] != null) {
-          sendTo(users[data.otherUsername], { type: 'close' })
-        }
+// wss.on('connection', ws => {
+//   console.log('User connected')
 
-        break
+//   ws.on('message', message => {
+//     let data = null
 
-      default:
-        sendTo(ws, {
-          type: 'error',
-          message: 'Command not found: ' + data.type
-        })
+//     try {
+//       data = JSON.parse(message)
+//     } catch (error) {
+//       console.error('Invalid JSON', error)
+//       data = {}
+//     }
 
-        break
-    }
-  })
+//     switch (data.type) {
+//       case 'login':
+//         console.log('User logged', data.username)
+//         if (users[data.username]) {
+//           sendTo(ws, { type: 'login', success: false })
+//         } else {
+//           users[data.username] = ws
+//           ws.username = data.username
+//           sendTo(ws, { type: 'login', success: true })
+//         }
+//         break
+//       case 'offer':
+//         console.log('Sending offer to: ', data.otherUsername)
+//         if (users[data.otherUsername] != null) {
+//           ws.otherUsername = data.otherUsername
+//           sendTo(users[data.otherUsername], {
+//             type: 'offer',
+//             offer: data.offer,
+//             username: ws.username
+//           })
+//         }
+//         break
+//       case 'answer':
+//         console.log('Sending answer to: ', data.otherUsername)
+//         if (users[data.otherUsername] != null) {
+//           ws.otherUsername = data.otherUsername
+//           sendTo(users[data.otherUsername], {
+//             type: 'answer',
+//             answer: data.answer
+//           })
+//         }
+//         break
+//       case 'candidate':
+//         console.log('Sending candidate to:', data.otherUsername)
+//         if (users[data.otherUsername] != null) {
+//           sendTo(users[data.otherUsername], {
+//             type: 'candidate',
+//             candidate: data.candidate
+//           })
+//         }
+//         break
+//       case 'close':
+//         console.log('Disconnecting from', data.otherUsername)
+//         users[data.otherUsername].otherUsername = null
 
-  ws.on('close', () => {
-    if (ws.username) {
-      delete users[ws.username]
+//         if (users[data.otherUsername] != null) {
+//           sendTo(users[data.otherUsername], { type: 'close' })
+//         }
 
-      if (ws.otherUsername) {
-        console.log('Disconnecting from ', ws.otherUsername)
-        users[ws.otherUsername].otherUsername = null
+//         break
 
-        if (users[ws.otherUsername] != null) {
-          sendTo(users[ws.otherUsername], { type: 'close' })
-        }
-      }
-    }
-  })
-})
+//       default:
+//         sendTo(ws, {
+//           type: 'error',
+//           message: 'Command not found: ' + data.type
+//         })
+
+//         break
+//     }
+//   })
+
+//   ws.on('close', () => {
+//     if (ws.username) {
+//       delete users[ws.username]
+
+//       if (ws.otherUsername) {
+//         console.log('Disconnecting from ', ws.otherUsername)
+//         users[ws.otherUsername].otherUsername = null
+
+//         if (users[ws.otherUsername] != null) {
+//           sendTo(users[ws.otherUsername], { type: 'close' })
+//         }
+//       }
+//     }
+//   })
+// })
