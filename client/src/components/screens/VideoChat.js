@@ -11,7 +11,7 @@ class VideoChat extends Component {
             firstName: '',
             lastName: '',
             email: '',
-            ws: new WebSocket("wss://app-cliniclowns.herokuapp.com", "5050"),
+            ws: new WebSocket("wss://app-cliniclowns.herokuapp.com:5050"),
             connection: new RTCPeerConnection({
                 iceServers: [{ url: 'stun:stun2.1.google.com:19302' }]
             }),
@@ -21,6 +21,7 @@ class VideoChat extends Component {
     }
 
     componentDidMount () {
+        console.log(this.state.ws);
         // get data of loggedin user
         let auth = requireAuth();
         // if user logged in stay on the page
