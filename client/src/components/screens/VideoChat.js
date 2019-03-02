@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { requireAuth } from '../../functions/AuthFunctions'
 import './VideoChat.css'
-import openSocket from 'socket.io-client';
+import io from 'socket.io-client';
 
 class VideoChat extends Component {
     constructor() {
@@ -12,7 +12,7 @@ class VideoChat extends Component {
             firstName: '',
             lastName: '',
             email: '',
-            io: openSocket('https://app-cliniclowns.herokuapp.com:5050'),
+            // io: openSocket('https://app-cliniclowns.herokuapp.com:5050'),
             // ws: new WebSocket("ws://localhost:5050"),
             connection: new RTCPeerConnection({
                 iceServers: [{ url: 'stun:stun2.1.google.com:19302' }]
@@ -58,8 +58,8 @@ class VideoChat extends Component {
         //     console.log(data);
         //     io.emit('my other event', { my: 'data' });
         // });
-
-        var socket = openSocket('https://app-cliniclowns.herokuapp.com:5050');
+        const socket = io();
+        // var socket = openSocket('https://app-cliniclowns.herokuapp.com:5050');
         socket.on('news', function (data) {
             console.log(data);
             socket.emit('my other event', { my: 'data' });

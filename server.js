@@ -4,6 +4,7 @@ const bodyParser = require("body-parser")
 const app = express()
 const path = require('path')
 const port = process.env.PORT || 5000
+// development // production
 const env = process.env.NODE_ENV || 'production';
 
 app.use(bodyParser.json())
@@ -34,17 +35,10 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname+'/client/public/index.html'));
 })
 
-// start server
-app.listen(port, (req, res) => {
-  console.log( `server listening on port: ${port}`);
-})
-
-
-
-
 // Websockets videochat //
 
-var io = require('socket.io')();
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
 
 io.on('connection', function (socket) {
   socket.emit('news', { hello: 'world' });
@@ -53,9 +47,21 @@ io.on('connection', function (socket) {
   });
 });
 
-const ioPort = 5050;
-io.listen(ioPort);
-console.log('listening on port ', ioPort);
+// start server
+server.listen(port, (req, res) => {
+  console.log( `server listening on port: ${port}`);
+})
+
+// io.on('connection', function (socket) {
+//   socket.emit('news', { hello: 'world' });
+//   socket.on('my other event', function (data) {
+//     console.log(data);
+//   });
+// });
+
+// const ioPort = 5050;
+// io.listen(ioPort);
+// console.log('listening on port ', ioPort);
 
 // io.on('connection', function(socket){
 //   console.log('a user connected');
