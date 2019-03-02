@@ -12,7 +12,7 @@ class VideoChat extends Component {
             firstName: '',
             lastName: '',
             email: '',
-            io: openSocket('http://localhost:5050'),
+            io: openSocket('https://app-cliniclowns.herokuapp.com:5050'),
             // ws: new WebSocket("ws://localhost:5050"),
             connection: new RTCPeerConnection({
                 iceServers: [{ url: 'stun:stun2.1.google.com:19302' }]
