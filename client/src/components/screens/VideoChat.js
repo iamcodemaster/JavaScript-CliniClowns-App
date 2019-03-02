@@ -11,7 +11,7 @@ class VideoChat extends Component {
             firstName: '',
             lastName: '',
             email: '',
-            ws: new WebSocket('ws://localhost:5050'),
+            ws: new WebSocket('ws://34.241.174.136:5050'),
             connection: new RTCPeerConnection({
                 iceServers: [{ url: 'stun:stun2.1.google.com:19302' }]
             }),
