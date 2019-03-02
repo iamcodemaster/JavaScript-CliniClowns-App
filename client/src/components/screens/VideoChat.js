@@ -59,7 +59,7 @@ class VideoChat extends Component {
         //     io.emit('my other event', { my: 'data' });
         // });
 
-        var socket = openSocket('http://localhost:5050');
+        var socket = openSocket('https://app-cliniclowns.herokuapp.com:5050');
         socket.on('news', function (data) {
             console.log(data);
             socket.emit('my other event', { my: 'data' });
