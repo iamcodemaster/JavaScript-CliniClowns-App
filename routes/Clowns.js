@@ -82,21 +82,21 @@ clowns.get('/all', (req, res) => {
     })
 })
 
-clowns.get('/:id', (req, res) => {
-    Clown.findByPk(req.params.id, {
-        attributes: [
-            'id', 
-            'firstName', 
-            'lastName',
-            'image'
-        ]
-    })
-    .then(clown => {
-        res.send(clown);
-    })
-    .catch(err => {
-        res.status(400).json({ error: err })
-    })
-})
+// clowns.get('/:id', (req, res) => {
+//     Clown.findByPk(req.params.id, {
+//         attributes: [
+//             'id', 
+//             'firstName', 
+//             'lastName',
+//             'image'
+//         ]
+//     })
+//     .then(clown => {
+//         res.send(clown);
+//     })
+//     .catch(err => {
+//         res.status(400).json({ error: err })
+//     })
+// })
 
 module.exports = clowns

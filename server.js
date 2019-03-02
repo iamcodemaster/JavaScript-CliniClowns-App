@@ -3,7 +3,8 @@ const cors = require("cors")
 const bodyParser = require("body-parser")
 const app = express()
 const path = require('path')
-const port = process.env.PORT || 5000
+const port = process.env.PORT || 8080
+const env = process.env.NODE_ENV || 'production';
 
 app.use(bodyParser.json())
 app.use(cors())
@@ -20,9 +21,9 @@ app.use('/clowns', Clowns)
 app.use(express.static(path.join(__dirname, 'client/build')));
 
 // production mode
-if(process.env.NODE_ENV === 'production') {
+if(env === 'production') {
   app.use(express.static(path.join(__dirname, 'client/build')));
-  //
+
   app.get('*', (req, res) => {
     res.sendfile(path.join(__dirname = 'client/build/index.html'));
   })
