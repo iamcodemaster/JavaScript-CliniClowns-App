@@ -12,7 +12,7 @@ class VideoChat extends Component {
             firstName: '',
             lastName: '',
             email: '',
-            socket: openSocket('https://app-cliniclowns.herokuapp.com:5050'),
+            io: openSocket('http://localhost:5050'),
             // ws: new WebSocket("ws://localhost:5050"),
             connection: new RTCPeerConnection({
                 iceServers: [{ url: 'stun:stun2.1.google.com:19302' }]
@@ -23,31 +23,48 @@ class VideoChat extends Component {
     }
 
     componentDidMount () {
-        // // get data of loggedin user
-        // let auth = requireAuth();
-        // // if user logged in stay on the page
-        // if(auth.res === true) {
-        //     if(auth.user.type === 'user') {
-        //         this.setState({
-        //             id: auth.user.id,
-        //             firstName: auth.user.firstName,
-        //             lastName: auth.user.lastName,
-        //             email: auth.user.email
-        //         })
-        //     } else if(auth.user.type === 'clown') {
-        //         this.setState({
-        //             id: auth.user.id,
-        //             nickname: auth.user.nickname,
-        //             firstName: auth.user.firstName,
-        //             lastName: auth.user.lastName,
-        //             email: auth.user.email
-        //         })
-        //     }
-        // } else {
-        //     this.props.history.push(`/login`)
-        // }
+        // get data of loggedin user
+        let auth = requireAuth();
+        // if user logged in stay on the page
+        if(auth.res === true) {
+            if(auth.user.type === 'user') {
+                this.setState({
+                    id: auth.user.id,
+                    firstName: auth.user.firstName,
+                    lastName: auth.user.lastName,
+                    email: auth.user.email
+                })
+            } else if(auth.user.type === 'clown') {
+                this.setState({
+                    id: auth.user.id,
+                    nickname: auth.user.nickname,
+                    firstName: auth.user.firstName,
+                    lastName: auth.user.lastName,
+                    email: auth.user.email
+                })
+            }
+        } else {
+            this.props.history.push(`/login`)
+        }
 
-        // // Websockets
+        // Websockets
+
+        // this.state.io.emit('chat message', 'Connected to the signaling server');
+        // this.state.io.on('connection', function (socket) {
+        //     console.log('Connected to the signaling server')
+        // });
+        // var io = openSocket('http://localhost:5050');
+        // io.on('connection', function (data) {
+        //     console.log(data);
+        //     io.emit('my other event', { my: 'data' });
+        // });
+
+        var socket = openSocket('http://localhost:5050');
+        socket.on('news', function (data) {
+            console.log(data);
+            socket.emit('my other event', { my: 'data' });
+        });
+
         // this.state.ws.onopen = () => {
         //     console.log('Connected to the signaling server')
         // }

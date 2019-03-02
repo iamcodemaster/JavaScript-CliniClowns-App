@@ -46,13 +46,10 @@ app.listen(port, (req, res) => {
 
 var io = require('socket.io')();
 
-io.on('connection', (client) => {
-  console.log("hello");
-  client.on('subscribeToTimer', (interval) => {
-    console.log('client is subscribing to timer with interval ', interval);
-    setInterval(() => {
-      client.emit('timer', new Date());
-    }, interval);
+io.on('connection', function (socket) {
+  socket.emit('news', { hello: 'world' });
+  socket.on('my other event', function (data) {
+    console.log(data);
   });
 });
 
