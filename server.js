@@ -37,133 +37,123 @@ app.get('*', (req, res) => {
 
 // Websockets videochat //
 
-var server = require('http').Server(app);
-var io = require('socket.io')(server);
+const server = require('http').Server(app);
+const io = require('socket.io')(server);
+let users = {}
 
-io.on('connection', function (socket) {
-  socket.emit('news', { hello: 'world' });
-  socket.on('my other event', function (data) {
-    console.log(data);
-  });
-});
+// io.on('connection', function (socket) {
+  
+//   socket.on('login', function(data){
+//     console.log('server: ' + data.user);
+//     socket.emit('login', )
+//   });
+
+//   socket.on('login', function(data){
+//     console.log('server: ' + data.user);
+//   });
+
+// });
 
 // start server
 server.listen(port, (req, res) => {
   console.log( `server listening on port: ${port}`);
 })
 
-// io.on('connection', function (socket) {
-//   socket.emit('news', { hello: 'world' });
-//   socket.on('my other event', function (data) {
-//     console.log(data);
-//   });
-// });
-
-// const ioPort = 5050;
-// io.listen(ioPort);
-// console.log('listening on port ', ioPort);
-
-// io.on('connection', function(socket){
-//   console.log('a user connected');
-//   socket.on('disconnect', function(){
-//     console.log('user disconnected');
-//   });
-// });
-
 // const WebSocket = require('ws')
 // const wss = new WebSocket.Server({ port: 5050 })
 // let users = {}
 
-// const sendTo = (ws, message) => {
-//   ws.send(JSON.stringify(message))
-// }
+const sendTo = (ws, message) => {
+  ws.emit('message', JSON.stringify(message))
+}
 
-// wss.on('connection', ws => {
-//   console.log('User connected')
+io.on('connection', ws => {
+  console.log('User connected')
 
-//   ws.on('message', message => {
-//     let data = null
+  ws.on('message', message => {
+    let data = null
 
-//     try {
-//       data = JSON.parse(message)
-//     } catch (error) {
-//       console.error('Invalid JSON', error)
-//       data = {}
-//     }
+    try {
+      data = JSON.parse(message)
+      console.log(data.type);
+    } catch (error) {
+      console.error('Invalid JSON', error)
+      data = {}
+    }
 
-//     switch (data.type) {
-//       case 'login':
-//         console.log('User logged', data.username)
-//         if (users[data.username]) {
-//           sendTo(ws, { type: 'login', success: false })
-//         } else {
-//           users[data.username] = ws
-//           ws.username = data.username
-//           sendTo(ws, { type: 'login', success: true })
-//         }
-//         break
-//       case 'offer':
-//         console.log('Sending offer to: ', data.otherUsername)
-//         if (users[data.otherUsername] != null) {
-//           ws.otherUsername = data.otherUsername
-//           sendTo(users[data.otherUsername], {
-//             type: 'offer',
-//             offer: data.offer,
-//             username: ws.username
-//           })
-//         }
-//         break
-//       case 'answer':
-//         console.log('Sending answer to: ', data.otherUsername)
-//         if (users[data.otherUsername] != null) {
-//           ws.otherUsername = data.otherUsername
-//           sendTo(users[data.otherUsername], {
-//             type: 'answer',
-//             answer: data.answer
-//           })
-//         }
-//         break
-//       case 'candidate':
-//         console.log('Sending candidate to:', data.otherUsername)
-//         if (users[data.otherUsername] != null) {
-//           sendTo(users[data.otherUsername], {
-//             type: 'candidate',
-//             candidate: data.candidate
-//           })
-//         }
-//         break
-//       case 'close':
-//         console.log('Disconnecting from', data.otherUsername)
-//         users[data.otherUsername].otherUsername = null
+    switch (data.type) {
+      case 'login':
+        console.log('User logged', data.username)
+        if (users[data.username]) {
+          sendTo(ws, { type: 'login', success: false })
+        } else {
+          users[data.username] = ws
+          ws.username = data.username
+          sendTo(ws, { type: 'login', success: true })
+        }
+        break
+      case 'offer':
+        console.log('Sending offer to: ', data.otherUsername)
+        if (users[data.otherUsername] != null) {
+          ws.otherUsername = data.otherUsername
+          sendTo(users[data.otherUsername], {
+            type: 'offer',
+            offer: data.offer,
+            username: ws.username
+          })
+        }
+        break
+      case 'answer':
+        console.log('Sending answer to: ', data.otherUsername)
+        if (users[data.otherUsername] != null) {
+          ws.otherUsername = data.otherUsername
+          sendTo(users[data.otherUsername], {
+            type: 'answer',
+            answer: data.answer
+          })
+        }
+        break
+      case 'candidate':
+        console.log('Sending candidate to:', data.otherUsername)
+        if (users[data.otherUsername] != null) {
+          sendTo(users[data.otherUsername], {
+            type: 'candidate',
+            candidate: data.candidate
+          })
+        }
+        break
+      case 'close':
+        console.log('Disconnecting from', data.otherUsername)
+        users[data.otherUsername].otherUsername = null
 
-//         if (users[data.otherUsername] != null) {
-//           sendTo(users[data.otherUsername], { type: 'close' })
-//         }
+        if (users[data.otherUsername] != null) {
+          sendTo(users[data.otherUsername], { type: 'close' })
+        }
 
-//         break
+        break
 
-//       default:
-//         sendTo(ws, {
-//           type: 'error',
-//           message: 'Command not found: ' + data.type
-//         })
+      default:
+        sendTo(ws, {
+          type: 'error',
+          message: 'Command not found: ' + data.type
+        })
 
-//         break
-//     }
-//   })
+        break
+    }
+  })
 
-//   ws.on('close', () => {
-//     if (ws.username) {
-//       delete users[ws.username]
+  ws.on('close', () => {
+    if (ws.username) {
+      delete users[ws.username]
 
-//       if (ws.otherUsername) {
-//         console.log('Disconnecting from ', ws.otherUsername)
-//         users[ws.otherUsername].otherUsername = null
+      if (ws.otherUsername) {
+        console.log('Disconnecting from ', ws.otherUsername)
+        users[ws.otherUsername].otherUsername = null
 
-//         if (users[ws.otherUsername] != null) {
-//           sendTo(users[ws.otherUsername], { type: 'close' })
-//         }
-//       }
-//     }
-//   })
-// })
+        if (users[ws.otherUsername] != null) {
+          sendTo(users[ws.otherUsername], { type: 'close' })
+        }
+      }
+    }
+  })
+})
