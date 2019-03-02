@@ -3,7 +3,7 @@ const cors = require("cors")
 const bodyParser = require("body-parser")
 const app = express()
 const path = require('path')
-const port = process.env.PORT || 8080
+const port = process.env.PORT || 5000
 const env = process.env.NODE_ENV || 'production';
 
 app.use(bodyParser.json())
@@ -45,7 +45,7 @@ app.listen(port, (req, res) => {
 // Websockets videochat //
 
 const WebSocket = require('ws')
-const wss = new WebSocket.Server({ port: 8000 })
+const wss = new WebSocket.Server({ port: 5050 })
 let users = {}
 
 const sendTo = (ws, message) => {
