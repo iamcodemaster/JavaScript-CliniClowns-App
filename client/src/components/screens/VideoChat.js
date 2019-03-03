@@ -12,8 +12,6 @@ class VideoChat extends Component {
             firstName: '',
             lastName: '',
             email: '',
-            // io: openSocket('https://app-cliniclowns.herokuapp.com:5050'),
-            // ws: new WebSocket("ws://localhost:5050"),
             connection: new RTCPeerConnection({
                 iceServers: [{ url: 'stun:stun2.1.google.com:19302' }]
             }),
@@ -51,34 +49,6 @@ class VideoChat extends Component {
 
         // connect client with server
         const socket = io();
-
-        // document.querySelector('button#login').addEventListener('click', event => {
-        //     let username = document.querySelector('#username').value
-
-        //     if (username.length < 0) {
-        //         alert('Please enter a username 🙂')
-        //         return
-        //     }
-
-        //     socket.emit('login', { 
-        //         user: auth.user.firstName,
-        //     });
-        // })
-
-        // socket.on('login', function (data) {
-        //     console.log("client login");
-        //     socket.emit('login', { 
-        //         user: 'Robert' 
-        //     });
-        // });
-
-        // socket.onopen = () => {
-        //     console.log('Connected to the signaling server')
-        // }
-          
-        // socket.onerror = err => {
-        //     console.error(err)
-        // }
           
         socket.on('message', function(msg) {
             console.log('Got message', msg)
@@ -114,6 +84,7 @@ class VideoChat extends Component {
             socket.emit('message', JSON.stringify(message))
         }
         
+        // Tell the server that a user is on the page
         sendMessage({
             type: 'login',
             username: auth.user.email
@@ -249,7 +220,7 @@ class VideoChat extends Component {
                         <video id="remote" autoPlay playsInline></video>
                     </div>
 
-                    <div style="position: absolute">
+                    <div id="call-container">
                         <input id="username-to-call" placeholder="Username to call" />
                         <button id="call">Call</button>
                         <button id="close-call">Close call</button>

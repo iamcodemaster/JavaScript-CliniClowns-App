@@ -50,7 +50,8 @@ server.listen(port, (req, res) => {
 const sendTo = (io, message) => {
   io.emit('message', JSON.stringify(message))
 }
-let users= {}
+let users = {}
+let clowns = {}
 
 // On connection with the server
 io.on('connection', io => {

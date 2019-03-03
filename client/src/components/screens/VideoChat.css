@@ -31,3 +31,7 @@ video {
 	min-width: 0px;
 	min-height: 0px;
 }
+
+#call-container {
+    position: absolute;
+}
