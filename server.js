@@ -35,78 +35,68 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname+'/client/public/index.html'));
 })
 
-// Websockets videochat //
+// Socket io videochat
 
+// create server for websockets
 const server = require('http').Server(app);
+// connect websockets to server
 const io = require('socket.io')(server);
-let users = {}
-
-// io.on('connection', function (socket) {
-  
-//   socket.on('login', function(data){
-//     console.log('server: ' + data.user);
-//     socket.emit('login', )
-//   });
-
-//   socket.on('login', function(data){
-//     console.log('server: ' + data.user);
-//   });
-
-// });
-
 // start server
 server.listen(port, (req, res) => {
   console.log( `server listening on port: ${port}`);
 })
 
-// const WebSocket = require('ws')
-// const wss = new WebSocket.Server({ port: 5050 })
-// let users = {}
-
-const sendTo = (ws, message) => {
-  ws.emit('message', JSON.stringify(message))
+// Send emit to client function
+const sendTo = (io, message) => {
+  io.emit('message', JSON.stringify(message))
 }
+let users= {}
 
-io.on('connection', ws => {
+// On connection with the server
+io.on('connection', io => {
   console.log('User connected')
 
-  ws.on('message', message => {
-    let data = null
+  // On client message
+  io.on('message', message => {
 
+    // get data from client message
+    let data = null
     try {
       data = JSON.parse(message)
-      console.log(data.type);
     } catch (error) {
       console.error('Invalid JSON', error)
       data = {}
     }
 
+    // check data type
     switch (data.type) {
+      // on user active
       case 'login':
-        console.log('User logged', data.username)
+        console.log('User active:', data.username)
         if (users[data.username]) {
-          sendTo(ws, { type: 'login', success: false })
+          sendTo(io, { type: 'login', success: false })
         } else {
-          users[data.username] = ws
-          ws.username = data.username
-          sendTo(ws, { type: 'login', success: true })
+          users[data.username] = io
+          io.username = data.username
+          sendTo(io, { type: 'login', success: true })
         }
         break
       case 'offer':
         console.log('Sending offer to: ', data.otherUsername)
+        console.log(users);
         if (users[data.otherUsername] != null) {
-          ws.otherUsername = data.otherUsername
+          io.otherUsername = data.otherUsername
           sendTo(users[data.otherUsername], {
             type: 'offer',
             offer: data.offer,
-            username: ws.username
+            username: io.username
           })
         }
         break
       case 'answer':
         console.log('Sending answer to: ', data.otherUsername)
         if (users[data.otherUsername] != null) {
-          ws.otherUsername = data.otherUsername
+          io.otherUsername = data.otherUsername
           sendTo(users[data.otherUsername], {
             type: 'answer',
             answer: data.answer
@@ -133,7 +123,7 @@ io.on('connection', ws => {
         break
 
       default:
-        sendTo(ws, {
+        sendTo(io, {
           type: 'error',
           message: 'Command not found: ' + data.type
         })
@@ -142,16 +132,16 @@ io.on('connection', ws => {
     }
   })
 
-  ws.on('close', () => {
-    if (ws.username) {
-      delete users[ws.username]
+  io.on('close', () => {
+    if (io.username) {
+      delete users[io.username]
 
-      if (ws.otherUsername) {
-        console.log('Disconnecting from ', ws.otherUsername)
-        users[ws.otherUsername].otherUsername = null
+      if (io.otherUsername) {
+        console.log('Disconnecting from ', io.otherUsername)
+        users[io.otherUsername].otherUsername = null
 
-        if (users[ws.otherUsername] != null) {
-          sendTo(users[ws.otherUsername], { type: 'close' })
+        if (users[io.otherUsername] != null) {
+          sendTo(users[io.otherUsername], { type: 'close' })
         }
       }
     }

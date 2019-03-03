@@ -113,60 +113,49 @@ class VideoChat extends Component {
           
             socket.emit('message', JSON.stringify(message))
         }
+        
+        sendMessage({
+            type: 'login',
+            username: auth.user.email
+        })
 
         document.querySelector('div#call').style.display = 'none'
 
-        document.querySelector('button#login').addEventListener('click', event => {
-            let username = document.querySelector('#username').value
-
-            if (username.length < 0) {
-                alert('Please enter a username 🙂')
-                return
-            }
-
-            sendMessage({
-                type: 'login',
-                username: auth.user.firstName
-            })
-        })
-
+        // Join videochat on page navigate
         const handleLogin = async success => {
-            if (success === false) {
-                alert('😞 Username already taken')
-            } else {
-                document.querySelector('div#login').style.display = 'none'
-                document.querySelector('div#call').style.display = 'block'
-            
-                let localStream
-                try {
-                    localStream = await navigator.mediaDevices.getUserMedia({
-                        video: { facingMode: "user" },
-                        audio: true
-                    })
-                } catch (error) {
-                    alert(`${error.name}`)
-                    console.error(error)
-                }
-            
-                document.querySelector('video#local').srcObject = localStream
-            
-                this.state.connection.addStream(localStream)
-            
-                this.state.connection.onaddstream = event => {
-                    document.querySelector('video#remote').srcObject = event.stream
-                }
-            
-                this.state.connection.onicecandidate = event => {
-                    if (event.candidate) {
+            document.querySelector('div#login').style.display = 'none'
+            document.querySelector('div#call').style.display = 'block'
+        
+            let localStream
+            try {
+                localStream = await navigator.mediaDevices.getUserMedia({
+                    video: { facingMode: "user" },
+                    audio: true
+                })
+            } catch (error) {
+                alert(`${error.name}`)
+                console.error(error)
+            }
+        
+            document.querySelector('video#local').srcObject = localStream
+        
+            this.state.connection.addStream(localStream)
+        
+            this.state.connection.onaddstream = event => {
+                document.querySelector('video#remote').srcObject = event.stream
+            }
+        
+            this.state.connection.onicecandidate = event => {
+                if (event.candidate) {
                     sendMessage({
                         type: 'candidate',
                         candidate: event.candidate
                     })
-                    }
                 }
             }
         }
 
+        // Call user
         document.querySelector('button#call').addEventListener('click', () => {
             const callToUsername = document.querySelector('input#username-to-call').value
         
@@ -185,7 +174,8 @@ class VideoChat extends Component {
                         type: 'offer',
                         offer: offer
                     })
-            
+                    
+                    console.log(offer)
                     this.state.connection.setLocalDescription(offer)
                 },
                 error => {
@@ -254,8 +244,10 @@ class VideoChat extends Component {
                 </div>
 
                 <div id="call">
-                    <video id="local" autoPlay></video>
-                    <video id="remote" autoPlay></video>
+                    <video class="localVideo" id="local" autoPlay playsInline muted></video>
+                    <div className="remoteVideo">
+                        <video id="remote" autoPlay playsInline></video>
+                    </div>
 
                     <div>
                         <input id="username-to-call" placeholder="Username to call" />
