@@ -249,7 +249,7 @@ class VideoChat extends Component {
                         <video id="remote" autoPlay playsInline></video>
                     </div>
 
-                    <div>
+                    <div style="position: absolute">
                         <input id="username-to-call" placeholder="Username to call" />
                         <button id="call">Call</button>
                         <button id="close-call">Close call</button>
