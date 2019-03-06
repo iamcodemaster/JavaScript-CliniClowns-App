@@ -44,7 +44,7 @@ class Videos extends Component {
                 <ScreenNav/>
                 <div>
                     <h1 className="text-center">Videos</h1>
-                    <ul>{listVideos}</ul>
+                    <ul class="container--flex">{listVideos}</ul>
                 </div>
             </div>
         )

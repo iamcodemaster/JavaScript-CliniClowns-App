@@ -1,3 +1,7 @@
+*{
+    box-sizing: border-box;
+}
+
 h1,
 h2,
 h3,
@@ -35,12 +39,30 @@ img {
 }
 
 @media (min-width:768px) {
+    .container {
+        margin: 3em;
+    }
+
     .container--flex {
         display: flex;
         flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+
+    img {
+        width: 400px;
     }
 }
 
-@media (min-width:1224px) {}
+@media (min-width:1224px) {
+    .container {
+        margin: 4em;
+    }
+}
 
-@media (min-width:1824px) {}
+@media (min-width:1824px) {
+    .container {
+        margin: 5em;
+    }
+}
