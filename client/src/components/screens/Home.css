@@ -1,0 +1,12 @@
+.logo{
+    background-image: url(/assets/logo/logo.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    display: block;
+    height: 50px;
+    width: auto;
+}
+
+.logo p{
+    visibility: hidden;
+}

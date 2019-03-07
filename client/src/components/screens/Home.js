@@ -6,9 +6,13 @@ class Home extends Component {
     render () {
         return (
             <div className="container">
+            <header>
+                <a href="/" class="logo">
+                    <p>Home</p>
+                </a>
                 <Navbar />
+            </header>
                 <div>
-                    <h1 className="text-center">Home</h1>
                 </div>
             </div>
         )
