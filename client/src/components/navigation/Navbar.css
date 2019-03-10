@@ -1,4 +1,13 @@
 .navbar-nav{
     position: fixed;
-    top: 50%;
+    top: 25%;
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.nav-item{
+    background-color: white;
+    border-radius: 100%;
 }
