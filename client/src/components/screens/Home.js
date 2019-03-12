@@ -22,28 +22,28 @@ class Home extends Component {
                         </a>
                     </div>
                     <div class="map-element" id="tipi">
-                        <a href="/clowns">
-                            <img src="/assets/map/tipi.png" alt="weet ik nog nie"></img>
+                        <a href="/videos">
+                            <img src="/assets/map/tipi.png" alt="bekijk onze video's"></img>
                         </a>
                     </div>
                     <div class="map-element" id="airballoon">
-                        <a href="/clowns">
-                            <img src="/assets/map/airballoon.png" alt="ontdek de clowns"></img>
+                        <a href="/videochat">
+                            <img src="/assets/map/airballoon.png" alt="videocammen"></img>
                         </a>
                     </div>
                     <div class="map-element" id="caravan">
-                        <a href="/clowns">
-                            <img src="/assets/map/caravan.png" alt="ontdek de clowns"></img>
+                        <a href="/agenda">
+                            <img src="/assets/map/caravan.png" alt="bekijk hier je agenda"></img>
                         </a>
                     </div>
                     <div class="map-element" id="parasol">
-                        <a href="/clowns">
-                            <img src="/assets/map/parasol.png" alt="ontdek de clowns"></img>
+                        <a href="/gastenboek">
+                            <img src="/assets/map/parasol.png" alt="bekijk het gastenboek"></img>
                         </a>
                     </div>
                     <div class="map-element" id="tent">
-                        <a href="/clowns">
-                            <img src="/assets/map/tent.png" alt="ontdek de clowns"></img>
+                        <a href="/instellingen">
+                            <img src="/assets/map/tent.png" alt="instellingen"></img>
                         </a>
                     </div>
                     <div class="map-element" id="sign">
