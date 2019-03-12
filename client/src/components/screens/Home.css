@@ -47,6 +47,7 @@
 
 #clowns{
     right: -10%;
+    /* middenste getal : 16px ? */
     top: calc(50vh - 41px - 84px);
 }
 
