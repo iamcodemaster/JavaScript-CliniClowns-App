@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { register } from '../../functions/UserFunctions'
 import ScreenNav from '../navigation/ScreenNav'
-import './Register.css'
+import '../../main.css'
 
 class Register extends Component {
     constructor() {

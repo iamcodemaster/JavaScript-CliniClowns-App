@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import ScreenNav from '../navigation/ScreenNav'
 import axios from 'axios'
-import './Videos.css'
+import '../../main.css'
 
 class Videos extends Component {
     constructor() {

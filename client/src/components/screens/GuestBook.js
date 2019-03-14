@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import ScreenNav from '../navigation/ScreenNav'
 import { requireAuth } from '../../functions/AuthFunctions'
-import './GuestBook.css'
+import '../../main.css'
 
 class GuestBook extends Component {
     constructor() {

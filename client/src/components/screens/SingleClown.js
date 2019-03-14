@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { getClown } from '../../functions/Functions'
 import ScreenNav from '../navigation/ScreenNav'
-import './SingleClown.css'
+import '../../main.css'
 
 class Clowns extends Component {
     constructor() {

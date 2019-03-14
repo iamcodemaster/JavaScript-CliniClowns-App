@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { requireAuth } from '../../functions/AuthFunctions'
-import './VideoChat.css'
+import '../../main.css'
 
 class VideoChat extends Component {
     constructor() {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import { requireAuth } from '../../functions/AuthFunctions'
-import './Navbar.css'
+import '../../main.css'
 
 class Navbar extends Component {
     constructor() {

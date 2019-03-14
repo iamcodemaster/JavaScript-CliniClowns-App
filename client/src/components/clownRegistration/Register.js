@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { register } from '../../functions/ClownFunctions'
 import ScreenNav from '../navigation/ScreenNav'
+import '../../main.css'
 
 class Register extends Component {
     constructor() {

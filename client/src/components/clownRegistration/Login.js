@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { login } from '../../functions/ClownFunctions'
 import ScreenNav from '../navigation/ScreenNav'
+import '../../main.css'
 
 class Login extends Component {
     constructor() {

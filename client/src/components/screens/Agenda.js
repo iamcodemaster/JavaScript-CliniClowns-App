@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import ScreenNav from '../navigation/ScreenNav'
 import { requireAuth } from '../../functions/AuthFunctions'
-import './Agenda.css'
+import '../../main.css'
 
 class Agenda extends Component {
     constructor() {

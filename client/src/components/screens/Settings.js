@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { requireAuth } from '../../functions/AuthFunctions'
 import ScreenNav from '../navigation/ScreenNav'
-import './Settings.css'
+import '../../main.css'
 
 class Settings extends Component {
     constructor() {
