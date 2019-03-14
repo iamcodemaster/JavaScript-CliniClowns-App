@@ -1,15 +1,28 @@
 import React, { Component } from 'react'
-import ScreenNav from '../navigation/ScreenNav'
+import { Link } from 'react-router-dom'
 import { requireAuth } from '../../functions/AuthFunctions'
-import './Agenda.css'
+import ScreenNav from '../navigation/ScreenNav'
+import './Settings.css'
 
-class Agenda extends Component {
+class Settings extends Component {
     constructor() {
         super()
-        this.state = {}
+        this.state = {
+            id: '',
+            nickname: '',
+            firstName: '',
+            lastName: '',
+            email: ''
+        }
     }
 
-    componentDidMount() {
+    logOut = (e) => {
+        e.preventDefault()
+        localStorage.removeItem('token')
+        this.props.history.push(`/`)
+    }
+
+    componentDidMount () {
         // get data of loggedin user
         let auth = requireAuth();
         // if user logged in stay on the page
@@ -30,24 +43,33 @@ class Agenda extends Component {
                     email: auth.user.email
                 })
             }
-        } else {
-            this.props.history.push(`/login`)
         }
-    }   
+    }
 
     render () {
+        const dataLoggedIn = (
+            <div>
+                <p>Name: {this.state.firstName} {this.state.lastName}</p>
+                <p>Email: {this.state.email}</p>
+                <a href="#" onClick={this.logOut.bind(this)}>Logout</a>
+            </div>
+        );
+        const data = (
+            <div>
+                <Link to="/login">Login</Link>
+            </div>
+        );
         return (
             <div>
-                <ScreenNav
-                    title={'Agenda'} />
+                <ScreenNav 
+                    title={'Instellingen'} />
                 <div className="container">
-                    <div>
-                        <h1 className="text-center">Agenda</h1>
-                    </div>
+                    <h1>Instellingen</h1>
                 </div>
+                {localStorage.token ? dataLoggedIn : data}
             </div>
         )
     }
 }
 
-export default Agenda
+export default Settings

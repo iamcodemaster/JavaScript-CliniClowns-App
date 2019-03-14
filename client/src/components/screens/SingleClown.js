@@ -26,10 +26,13 @@ class Clowns extends Component {
 
     render () {
         return (
-            <div className="container">
-                <ScreenNav/>
-                <div>
-                    <h1 className="text-center">{this.state.firstName} {this.state.lastName}</h1>
+            <div>
+                <ScreenNav
+                    title={'Clown'}/>
+                <div className="container">
+                    <div>
+                        <h1 className="text-center">{this.state.firstName} {this.state.lastName}</h1>
+                    </div>
                 </div>
             </div>
         )

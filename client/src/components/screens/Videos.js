@@ -40,11 +40,14 @@ class Videos extends Component {
         );
 
         return (
-            <div className="container">
-                <ScreenNav/>
-                <div>
-                    <h1 className="text-center">Videos</h1>
-                    <ul class="container--flex">{listVideos}</ul>
+            <div>
+                <ScreenNav
+                    title={'Videos'} />
+                <div className="container">
+                    <div>
+                        <h1 className="text-center">Videos</h1>
+                        <ul class="container--flex">{listVideos}</ul>
+                    </div>
                 </div>
             </div>
         )

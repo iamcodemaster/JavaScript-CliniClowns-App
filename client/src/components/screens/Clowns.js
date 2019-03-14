@@ -29,11 +29,14 @@ class Clowns extends Component {
         );
 
         return (
-            <div className="container">
-            <ScreenNav/>
-                <div class="container--content">
-                    <h1>Clowns</h1>
-                    <ul class="container--flex">{listClowns}</ul>
+            <div>
+                <ScreenNav
+                    title={"Clowns"}/>
+                <div className="container">
+                    <div className="container--content">
+                        <h1>Clowns</h1>
+                        <ul className="container--flex">{listClowns}</ul>
+                    </div>
                 </div>
             </div>
         )

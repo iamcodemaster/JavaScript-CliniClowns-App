@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import ScreenNav from '../navigation/ScreenNav'
 import { requireAuth } from '../../functions/AuthFunctions'
-import './Agenda.css'
+import './GuestBook.css'
 
-class Agenda extends Component {
+class GuestBook extends Component {
     constructor() {
         super()
-        this.state = {}
+        this.state = {
+            clowns: [],
+        }
     }
 
     componentDidMount() {
@@ -36,18 +38,17 @@ class Agenda extends Component {
     }   
 
     render () {
+
         return (
             <div>
                 <ScreenNav
-                    title={'Agenda'} />
+                    title={"Gastenboek"}/>
                 <div className="container">
-                    <div>
-                        <h1 className="text-center">Agenda</h1>
-                    </div>
+                    <h1>Gastenboek</h1>
                 </div>
             </div>
         )
     }
 }
 
-export default Agenda
+export default GuestBook
