@@ -51,6 +51,37 @@ img {
     justify-content: space-between;
 }
 
+.nav-clown{
+    background: url(/assets/icons/clown-bg.png);
+}
+
+.nav-videos{
+    background: url(/assets/icons/videos-bg.png);
+}
+
+.nav-cam{
+    background: url(/assets/icons/cam-bg.png);
+}
+
+.nav-agenda{
+    background: url(/assets/icons/agenda-bg.png);
+}
+
+.nav-gastenboek{
+    background: url(/assets/icons/gastenboek-bg.png);
+}
+
+.nav-settings{
+    background: url(/assets/icons/settings-bg.png);
+}
+
+.nav-link{
+    padding: 10px;
+    width: 60%;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
 .screen--navigation {
     background-color: #fff;
 }
